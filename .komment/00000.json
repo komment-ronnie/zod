@@ -1,0 +1,480 @@
+[
+  {
+    "name": "rollup.config.js",
+    "path": "configs/rollup.config.js",
+    "content": {
+      "structured": {
+        "description": "a Rollup configuration that compiles a single input file \"src/index.ts\" into two separate output files: an ES module \"lib/index.mjs\" and a UMD module \"lib/index.umd.js\". The compilation is performed using the \"@rollup/plugin-typescript\" plugin, which is configured to use a specific tsconfig.json file for type checking and code generation.",
+        "items": []
+      }
+    }
+  },
+  {
+    "name": "babel.config.js",
+    "path": "configs/babel.config.js",
+    "content": {
+      "structured": {
+        "description": "A configuration for Babel, a JavaScript transpiler. The presets specify how the transpilation should be done. The \"@babel/preset-env\" preset configures the transpiler to use the current Node.js version as the target environment, while the \"@babel/preset-typescript\" preset enables TypeScript syntax support during the transpilation process.",
+        "items": []
+      }
+    }
+  },
+  {
+    "name": "vitest.config.ts",
+    "path": "configs/vitest.config.ts",
+    "content": {
+      "structured": {
+        "description": "the configuration for Vitest, a testing framework. It specifies an alias for Jest's global variables to be replaced with Vitest's equivalent, and sets up the test environment to include tests in all files with .test.ts extensions within the src directory. The isolation mode is set to false, which means that tests will not run in isolated modules.",
+        "items": []
+      }
+    }
+  },
+  {
+    "name": "enumUtil.ts",
+    "path": "deno/lib/helpers/enumUtil.ts",
+    "content": {
+      "structured": {
+        "description": "Utility types that convert union types into intersection and tuple types. The `UnionToIntersection` type converts a union type into an intersection type by recursively excluding the last type from the union until only one type remains. The `GetUnionLast` type gets the last type in a union, and `UnionToTuple` converts a union type into a tuple type. Finally, the `CastToStringTuple` type casts the resulting tuple to a string-tuple if all elements are strings.",
+        "items": []
+      }
+    }
+  },
+  {
+    "name": "parseUtil.ts",
+    "path": "deno/lib/helpers/parseUtil.ts",
+    "content": {
+      "structured": {
+        "description": "A parsing system that processes data according to schema definitions and returns results indicating whether the data is valid, dirty, or aborted. The system utilizes ZodErrorMap to map errors to custom messages and parse complex data structures like objects and arrays. It also includes functionality for handling asynchronous parsing and merging results from multiple parse operations.",
+        "items": [
+          {
+            "id": "275f9db1-64ae-1894-ad4c-1a389f041c38",
+            "ancestors": [],
+            "description": "Takes parameters to create a Zod issue object, which represents an error or validation failure. It combines input data with a path and error maps to generate a detailed error message.",
+            "params": [
+              {
+                "name": "params",
+                "default_value": null,
+                "optional": false,
+                "type_name": "{\n  data: any;\n  path: (string | number)[];\n  errorMaps: ZodErrorMap[];\n  issueData: IssueData;\n}",
+                "description": "Used to create an issue object."
+              }
+            ],
+            "returns": {
+              "type_name": "ZodIssue",
+              "description": "An object with three properties: `path`, `message`, and possibly others depending on the input data."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "const issueData = {\n  path: [0, 'name'],\n};\n\nmakeIssue({\n  data: { name: null },\n  path: [],\n  errorMaps: [{ validate: (issue) => issue.path.includes('name') }],\n  issueData,\n});\n",
+              "description": "\n\nCreates a new ZodIssue object based on the given params."
+            },
+            "name": "makeIssue",
+            "location": {
+              "start": 6,
+              "insert": 6,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 36,
+            "docLength": null
+          },
+          {
+            "id": "dc4674ab-75cd-f98d-b94b-e257f07f3905",
+            "ancestors": [],
+            "description": "Defines a set of properties that provide context and information about the parsing process.\n\nEstablishes an object type with several read-only properties.\nDesignates the properties as read-only using the `readonly` keyword, ensuring they cannot be modified after creation.\n\nSpecifies a common property with three sub-properties:\n- `issues`: An array of `ZodIssue` objects, which represents any issues encountered during parsing.\n- `contextualErrorMap`: An optional `ZodErrorMap` object that maps error codes to error messages.",
+            "name": "ParseContext",
+            "location": {
+              "start": 53,
+              "insert": 53,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "interface",
+            "length": 12,
+            "docLength": null
+          },
+          {
+            "id": "8a68c82a-a0a6-d187-034e-69b9f4deea87",
+            "ancestors": [],
+            "description": "Adds an issue to a context object. It creates an issue object with provided data, error maps from various sources (contextual, schema-bound, override, and default), and pushes it to the context's issues array.",
+            "params": [
+              {
+                "name": "ctx",
+                "default_value": null,
+                "optional": false,
+                "type_name": "ParseContext",
+                "description": "Used to store parse context information."
+              },
+              {
+                "name": "issueData",
+                "default_value": null,
+                "optional": false,
+                "type_name": "IssueData",
+                "description": "Required for creating an issue."
+              }
+            ],
+            "usage": {
+              "language": "typescript",
+              "code": "const ctx = { data: '', path: '' };\naddIssueToContext(ctx, { issueData: 'test' });\nctx.common.issues;",
+              "description": ""
+            },
+            "name": "addIssueToContext",
+            "location": {
+              "start": 72,
+              "insert": 72,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 18,
+            "docLength": null
+          },
+          {
+            "id": "f3adea3a-9ca4-1691-dc49-1f541253804b",
+            "ancestors": [],
+            "description": "Tracks and updates the parsing status of objects and arrays, providing a way to manage dirty and aborted states while processing results from multiple parsing operations. It ensures consistent status tracking throughout the merging process.",
+            "interfaces": [],
+            "superclass": null,
+            "is_abstract": false,
+            "fields": [
+              {
+                "name": "value",
+                "type_name": {
+                  "full": "\"aborted\" | \"dirty\" | \"valid\"",
+                  "pattern": "union",
+                  "left": {
+                    "full": "\"aborted\" | \"dirty\"",
+                    "pattern": "union",
+                    "left": "\"aborted\"",
+                    "right": "\"dirty\""
+                  },
+                  "right": "\"valid\""
+                },
+                "description": "Initialized to 'valid'."
+              }
+            ],
+            "name": "ParseStatus",
+            "location": {
+              "start": 95,
+              "insert": 95,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "class",
+            "length": 66,
+            "docLength": null
+          },
+          {
+            "id": "c3d3a545-0ea5-ba97-fc4b-dcd48814fe3c",
+            "ancestors": [
+              "f3adea3a-9ca4-1691-dc49-1f541253804b"
+            ],
+            "description": "Changes the value of an instance property from `\"valid\"` to `\"dirty\"`. This suggests that the property indicates the state of data parsing, where \"valid\" represents a valid parse and \"dirty\" represents an invalid or unparsed state.",
+            "params": [],
+            "usage": {
+              "language": "typescript",
+              "code": "const parseStatus = new ParseStatus();\nparseStatus.dirty(); // Change this.value to \"dirty\"\n",
+              "description": ""
+            },
+            "name": "dirty",
+            "location": {
+              "start": 97,
+              "insert": 97,
+              "offset": " ",
+              "indent": 2,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "329c0bc4-2c83-cd81-c54a-077e5f6c2632",
+            "ancestors": [
+              "f3adea3a-9ca4-1691-dc49-1f541253804b"
+            ],
+            "description": "Sets the value of an instance variable to \"aborted\" if it does not already hold that value. This method is used to indicate an abortion or cancellation of a parsing process.",
+            "params": [],
+            "usage": {
+              "language": "typescript",
+              "code": "const status = new ParseStatus();\nstatus.abort(); // Sets the value of status to \"aborted\".\n",
+              "description": "\nThis code initializes a new instance of `ParseStatus`, and then calls its `abort` method, which changes the value of the `value` property from `\"valid\"` (the default) to `\"aborted\"`."
+            },
+            "name": "abort",
+            "location": {
+              "start": 100,
+              "insert": 100,
+              "offset": " ",
+              "indent": 2,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "b7e1cd73-fdfe-3e90-dd43-e1219404ae7f",
+            "ancestors": [
+              "f3adea3a-9ca4-1691-dc49-1f541253804b"
+            ],
+            "description": "Takes an object with a status and an array of parse results, and returns a new object with a combined value from the parsed arrays and an updated status. It handles \"aborted\" and \"dirty\" statuses accordingly.",
+            "params": [
+              {
+                "name": "status",
+                "default_value": null,
+                "optional": false,
+                "type_name": "ParseStatus",
+                "description": "Used to track the merge status."
+              },
+              {
+                "name": "results",
+                "default_value": null,
+                "optional": false,
+                "type_name": "SyncParseReturnType<any>[]",
+                "description": "An array of parsing results."
+              }
+            ],
+            "returns": {
+              "type_name": "SyncParseReturnType",
+              "description": "An object containing two properties: a status property with a specific value and a value property with an array of values."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "const status = new ParseStatus();\nconst results1 = [{ status: \"valid\", value: 1 }, { status: \"valid\", value: 2 }];\nconst results2 = [{ status: \"dirty\", value: 3 }, { status: \"valid\", value: 4 }];\n\nconst mergedResult1 = ParseStatus.mergeArray(status, results1);\nconst mergedResult2 = ParseStatus.mergeArray(status, results2);\n\n",
+              "description": ""
+            },
+            "name": "mergeArray",
+            "location": {
+              "start": 104,
+              "insert": 104,
+              "offset": " ",
+              "indent": 2,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 13,
+            "docLength": null
+          },
+          {
+            "id": "c8a5b184-6903-11b4-474e-f4afaa71cec3",
+            "ancestors": [
+              "f3adea3a-9ca4-1691-dc49-1f541253804b"
+            ],
+            "description": "Asynchronously merges an array of key-value pairs into an object, awaiting values for each pair and returning the resulting merged object as a promise.",
+            "params": [
+              {
+                "name": "status",
+                "default_value": null,
+                "optional": false,
+                "type_name": "ParseStatus",
+                "description": "Used to specify the object status for merging."
+              },
+              {
+                "name": "pairs",
+                "default_value": null,
+                "optional": false,
+                "type_name": "{ key: ParseReturnType<any>; value: ParseReturnType<any> }[]",
+                "description": "Used to merge multiple key-value pairs into an object."
+              }
+            ],
+            "returns": {
+              "type_name": "Promise<SyncParseReturnType<any>>",
+              "description": "A promise that resolves to an object resulting from merging the provided key-value pairs according to the specified ParseStatus and SyncParseReturnType types."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "ParseStatus.mergeObjectAsync(\n  new ParseStatus(),\n  [\n    { key: async () => \"key1\", value: async () => \"value1\" },\n    { key: async () => \"key2\", value: async () => \"value2\" }\n  ]\n).then(result => console.log(result));",
+              "description": ""
+            },
+            "name": "mergeObjectAsync",
+            "location": {
+              "start": 118,
+              "insert": 118,
+              "offset": " ",
+              "indent": 2,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 15,
+            "docLength": null
+          },
+          {
+            "id": "27d7cf55-47f7-6e92-a241-e3d4b68890ff",
+            "ancestors": [
+              "f3adea3a-9ca4-1691-dc49-1f541253804b"
+            ],
+            "description": "Merges an array of object pairs into a single object, considering the status and value of each pair. It returns the merged object's status and value if all pairs are valid or aborted; otherwise, it returns an invalid status.",
+            "params": [
+              {
+                "name": "status",
+                "default_value": null,
+                "optional": false,
+                "type_name": "ParseStatus",
+                "description": "Updated accordingly."
+              },
+              {
+                "name": "pairs",
+                "default_value": null,
+                "optional": false,
+                "type_name": "{\n      key: SyncParseReturnType<any>;\n      value: SyncParseReturnType<any>;\n      alwaysSet?: boolean;\n    }[]",
+                "description": "Used to merge objects."
+              }
+            ],
+            "returns": {
+              "type_name": "SyncParseReturnType",
+              "description": "An object with two properties: 'status' and 'value'. The 'status' property holds a value of ParseStatus type and the 'value' property holds the merged object."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "const status = new ParseStatus();\nconst result1 = { status: 'dirty', value: { a: 1, b: 2 } };\nconst result2 = { status: 'valid', value: { c: 3, d: 4 } };\n\nstatus.mergeObjectSync(status, [{ key: result1, value: result2, alwaysSet: true }]);\n",
+              "description": ""
+            },
+            "name": "mergeObjectSync",
+            "location": {
+              "start": 134,
+              "insert": 134,
+              "offset": " ",
+              "indent": 2,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 26,
+            "docLength": null
+          },
+          {
+            "id": "7aa43de3-6b49-dfb3-d646-16ac390495e0",
+            "ancestors": [],
+            "description": "Defines a type that can represent three different states of parsing results and the corresponding data.\n\nIt specifies two properties:\n\n* `status`: This property is expected to be one of three possible values, which are \"aborted\", \"dirty\", or \"valid\". These status values indicate the outcome of the parsing process.\n* `data`: This property represents any type of data that may have been parsed. The data can be of any type, including numbers, strings, objects, arrays, and others.",
+            "name": "ParseResult",
+            "location": {
+              "start": 161,
+              "insert": 161,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "interface",
+            "length": 4,
+            "docLength": null
+          },
+          {
+            "id": "f3a565cd-38cc-e49f-494d-80aec41adcea",
+            "ancestors": [],
+            "description": "Checks whether a given value `x` is an instance of a Promise. It returns a boolean indicating whether `x` can be considered asynchronous, based on its type and the presence of the `Promise` object.",
+            "params": [
+              {
+                "name": "x",
+                "default_value": null,
+                "optional": false,
+                "type_name": "ParseReturnType<T>",
+                "description": "Checked if it's an instance of Promise."
+              }
+            ],
+            "returns": {
+              "type_name": "x is AsyncParseReturnType<T>",
+              "description": "A boolean indicating whether the input `x` is an instance of Promise or not."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "const result = parseData();\nif (isAsync(result)) {\n    // handle async result\n} else {\n    // handle sync result\n}\n",
+              "description": ""
+            },
+            "name": "isAsync",
+            "location": {
+              "start": 189,
+              "insert": 189,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 4,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "errors.ts",
+    "path": "deno/lib/errors.ts",
+    "content": {
+      "structured": {
+        "description": "And exports error mapping functionality using ZodErrorMap. The code initializes a default error map from an external locale file and sets up override functionality for custom error maps. It provides two functions: one to set an overridden error map and another to retrieve the current error map, which can be either the default or an overridden version.",
+        "items": [
+          {
+            "id": "8729c476-7b8b-2595-964d-e4d105fd9ad8",
+            "ancestors": [],
+            "description": "Updates an internal error map with a new value, which is then stored as the `overrideErrorMap`. This allows for customization or replacement of the default error handling behavior.",
+            "params": [
+              {
+                "name": "map",
+                "default_value": null,
+                "optional": false,
+                "type_name": "ZodErrorMap",
+                "description": "Intended to set error mapping."
+              }
+            ],
+            "usage": {
+              "language": "typescript",
+              "code": "setErrorMap({\n  invalidEmail: 'Invalid email address',\n});\n",
+              "description": ""
+            },
+            "name": "setErrorMap",
+            "location": {
+              "start": 7,
+              "insert": 7,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "4d378608-3f87-7ba5-704b-98917326dac8",
+            "ancestors": [],
+            "description": "Returns the value of a variable named `overrideErrorMap`.",
+            "params": [],
+            "returns": {
+              "type_name": "object",
+              "description": "Stored in a variable named `overrideErrorMap`."
+            },
+            "usage": {
+              "language": "typescript",
+              "code": "const errorMap = getErrorMap();\n",
+              "description": "\nThis code retrieves an override error map and assigns it to a variable."
+            },
+            "name": "getErrorMap",
+            "location": {
+              "start": 11,
+              "insert": 11,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 3,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "index.ts",
+    "path": "src/index.ts",
+    "content": {
+      "structured": {
+        "description": "An export module that re-exports all exports from a specified external module. It also explicitly exports the symbol `z` and sets it as the default export. The `import * as z from \"./external\"` statement imports all symbols from the external module and assigns them to the variable `z`.",
+        "items": []
+      }
+    }
+  }
+]
