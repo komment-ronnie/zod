@@ -405,56 +405,55 @@
     "path": "deno/lib/errors.ts",
     "content": {
       "structured": {
-        "description": "And exports error mapping functionality using ZodErrorMap. The code initializes a default error map from an external locale file and sets up override functionality for custom error maps. It provides two functions: one to set an overridden error map and another to retrieve the current error map, which can be either the default or an overridden version.",
+        "description": "And exports error mapping functionality using ZodErrorMap. It imports a default error map from locales/en.ts and provides an override mechanism for custom error maps through the setErrorMap function. The getErrorMap function returns the current error map, which can be either the default or an overridden one.",
         "items": [
           {
-            "id": "8729c476-7b8b-2595-964d-e4d105fd9ad8",
+            "id": "8a3750f7-f715-469b-424b-6735fd0ef597",
             "ancestors": [],
-            "description": "Updates an internal error map with a new value, which is then stored as the `overrideErrorMap`. This allows for customization or replacement of the default error handling behavior.",
+            "description": "Sets an error map, which is stored in the `overrideErrorMap` variable. The error map is passed as a parameter and is used to override the default error handling behavior for Zod schema validation errors.",
             "params": [
               {
                 "name": "map",
-                "default_value": null,
                 "optional": false,
                 "type_name": "ZodErrorMap",
-                "description": "Intended to set error mapping."
+                "description": "Used to set an error map."
               }
             ],
             "usage": {
               "language": "typescript",
-              "code": "setErrorMap({\n  invalidEmail: 'Invalid email address',\n});\n",
-              "description": ""
+              "code": "const errorMap = {\n  \"key1\": \"error message 1\",\n  \"key2\": \"error message 2\"\n};\n\nsetErrorMap(errorMap);\n",
+              "description": "\nThis code sets up a custom error map to handle specific errors in a typescript program."
             },
             "name": "setErrorMap",
             "location": {
-              "start": 7,
-              "insert": 7,
+              "start": 8,
+              "insert": 8,
               "offset": " ",
               "indent": 0,
               "comment": null
             },
             "item_type": "function",
-            "length": 3,
+            "length": 5,
             "docLength": null
           },
           {
-            "id": "4d378608-3f87-7ba5-704b-98917326dac8",
+            "id": "8ddc657a-9006-b8a8-a84d-a6aedcbcae64",
             "ancestors": [],
-            "description": "Returns the value of a variable named `overrideErrorMap`.",
+            "description": "Returns an error map referred to by the variable `overrideErrorMap`. The returned value is likely a mapping of error codes or messages to their corresponding descriptions or handling logic, allowing for easy retrieval and usage elsewhere in the codebase.",
             "params": [],
             "returns": {
               "type_name": "object",
-              "description": "Stored in a variable named `overrideErrorMap`."
+              "description": "`overrideErrorMap`."
             },
             "usage": {
               "language": "typescript",
               "code": "const errorMap = getErrorMap();\n",
-              "description": "\nThis code retrieves an override error map and assigns it to a variable."
+              "description": ""
             },
             "name": "getErrorMap",
             "location": {
-              "start": 11,
-              "insert": 11,
+              "start": 14,
+              "insert": 14,
               "offset": " ",
               "indent": 0,
               "comment": null
@@ -473,6 +472,16 @@
     "content": {
       "structured": {
         "description": "An export module that re-exports all exports from a specified external module. It also explicitly exports the symbol `z` and sets it as the default export. The `import * as z from \"./external\"` statement imports all symbols from the external module and assigns them to the variable `z`.",
+        "items": []
+      }
+    }
+  },
+  {
+    "name": "external.ts",
+    "path": "deno/lib/external.ts",
+    "content": {
+      "structured": {
+        "description": "An export list that consists of various modules and types from different files. These modules include error handling, parsing utilities, type aliases, utility functions, and custom types definitions. The exports provide access to these modules and types, allowing other parts of the application to utilize them. This facilitates code organization and reuse by breaking down complex functionality into manageable components.",
         "items": []
       }
     }
