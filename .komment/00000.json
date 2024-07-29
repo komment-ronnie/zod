@@ -405,24 +405,24 @@
     "path": "deno/lib/errors.ts",
     "content": {
       "structured": {
-        "description": "And exports error mapping functionality using ZodErrorMap. It imports a default error map from locales/en.ts and provides an override mechanism for custom error maps through the setErrorMap function. The getErrorMap function returns the current error map, which can be either the default or an overridden one.",
+        "description": "And exports error maps from locales/en.ts for Zod validation errors. It provides an override mechanism through setErrorMap function, allowing users to customize the error map. The getErrorMap function retrieves the current error map, either default or overridden.",
         "items": [
           {
-            "id": "8a3750f7-f715-469b-424b-6735fd0ef597",
+            "id": "431eca4b-73e1-058f-df4f-19f7daf00d4d",
             "ancestors": [],
-            "description": "Sets an error map, which is stored in the `overrideErrorMap` variable. The error map is passed as a parameter and is used to override the default error handling behavior for Zod schema validation errors.",
+            "description": "Overrides the existing error map with a new one provided as an argument. It updates the internal state by assigning the new error map to the `overrideErrorMap` variable.",
             "params": [
               {
                 "name": "map",
                 "optional": false,
                 "type_name": "ZodErrorMap",
-                "description": "Used to set an error map."
+                "description": "Used to set an error map for override."
               }
             ],
             "usage": {
               "language": "typescript",
-              "code": "const errorMap = {\n  \"key1\": \"error message 1\",\n  \"key2\": \"error message 2\"\n};\n\nsetErrorMap(errorMap);\n",
-              "description": "\nThis code sets up a custom error map to handle specific errors in a typescript program."
+              "code": "const errorMap = { 'key': 'error message' };\nsetErrorMap(errorMap);\n",
+              "description": ""
             },
             "name": "setErrorMap",
             "location": {
@@ -437,18 +437,18 @@
             "docLength": null
           },
           {
-            "id": "8ddc657a-9006-b8a8-a84d-a6aedcbcae64",
+            "id": "1efda984-b9c4-0a97-004b-24830258597d",
             "ancestors": [],
-            "description": "Returns an error map referred to by the variable `overrideErrorMap`. The returned value is likely a mapping of error codes or messages to their corresponding descriptions or handling logic, allowing for easy retrieval and usage elsewhere in the codebase.",
+            "description": "Returns the value of `overrideErrorMap`. This suggests that `overrideErrorMap` is a variable or an object holding error-related data, and the function provides access to it.",
             "params": [],
             "returns": {
               "type_name": "object",
-              "description": "`overrideErrorMap`."
+              "description": "Stored in a variable named `overrideErrorMap`."
             },
             "usage": {
               "language": "typescript",
               "code": "const errorMap = getErrorMap();\n",
-              "description": ""
+              "description": "\nIt returns the value of the overrideErrorMap variable."
             },
             "name": "getErrorMap",
             "location": {

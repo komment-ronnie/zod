@@ -6,11 +6,11 @@ let overrideErrorMap = defaultErrorMap;
 export { defaultErrorMap };
 
 /**
- * @description Sets an error map, which is stored in the `overrideErrorMap` variable.
- * The error map is passed as a parameter and is used to override the default error
- * handling behavior for Zod schema validation errors.
+ * @description Overrides the existing error map with a new one provided as an argument.
+ * It updates the internal state by assigning the new error map to the `overrideErrorMap`
+ * variable.
  *
- * @param {ZodErrorMap} map - Used to set an error map.
+ * @param {ZodErrorMap} map - Used to set an error map for override.
  */
 export function setErrorMap(map: ZodErrorMap) {
   
@@ -19,12 +19,11 @@ export function setErrorMap(map: ZodErrorMap) {
 }
 
 /**
- * @description Returns an error map referred to by the variable `overrideErrorMap`.
- * The returned value is likely a mapping of error codes or messages to their
- * corresponding descriptions or handling logic, allowing for easy retrieval and usage
- * elsewhere in the codebase.
+ * @description Returns the value of `overrideErrorMap`. This suggests that
+ * `overrideErrorMap` is a variable or an object holding error-related data, and the
+ * function provides access to it.
  *
- * @returns {object} `overrideErrorMap`.
+ * @returns {object} Stored in a variable named `overrideErrorMap`.
  */
 export function getErrorMap() {
   return overrideErrorMap;
